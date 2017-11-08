@@ -40,7 +40,6 @@ boolean demoMode = false;
 
 void setup() {
 	size(640, 480, P2D);
-	frameRate(60);
 	bg = loadImage("img/bg.jpg");
 	title = loadImage("img/title.jpg");
 	gameover = loadImage("img/gameover.jpg");
@@ -159,7 +158,6 @@ void draw() {
 				// Change this part to show soil and stone images based on soilHealth value
 				// NOTE: To avoid errors on webpage, you can either use floor(j / 4) or (int)(j / 4) to make sure it's an integer.
 				int areaIndex = floor(j / 4);
-				println(areaIndex);
 				image(soils[areaIndex][4], i * SOIL_SIZE, j * SOIL_SIZE);
 				
 			}
@@ -337,7 +335,7 @@ void draw() {
 				playerHealth = 2;
 
 				// Initialize soilHealth
-				int[][] soilHealth = new int[SOIL_COL_COUNT][SOIL_ROW_COUNT];
+				soilHealth = new int[SOIL_COL_COUNT][SOIL_ROW_COUNT];
 				for(int i = 0; i < soilHealth.length; i++){
 					for (int j = 0; j < soilHealth[i].length; j++) {
 						 // 0: no soil, 15: soil only, 30: 1 stone, 45: 2 stones
