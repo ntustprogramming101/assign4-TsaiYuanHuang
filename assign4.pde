@@ -1,17 +1,9 @@
-//unfinished : #1,#3,#4,#5,#6
 PImage title, gameover, startNormal, startHovered, restartNormal, restartHovered;
 PImage groundhogIdle, groundhogLeft, groundhogRight, groundhogDown;
 PImage bg, life, cabbage, stone1, stone2, soilEmpty;
 PImage soldier;
 PImage soil0, soil1, soil2, soil3, soil4, soil5;
 PImage[][] soils, stones;
-int []emptyX = new int [191];
-    final int n1= 0;
-    final int n2 = 1;
-    final int n3 = 2;
-    final int n4 = 3;
-    final int n5 = 4;
-    final int Y= 5;
 
 final int GAME_START = 0, GAME_RUN = 1, GAME_OVER = 2;
 int gameState = 0;
@@ -80,11 +72,6 @@ void setup() {
 			soils[i][j] = loadImage("img/soils/soil" + i + "/soil" + i + "_" + j + ".png");
 		}
 	}
-//emptysoil
-    
-    for (int s = 8; s<191; s++){
-      emptyX[s] = floor(random(6));  
-    }
 
 	// Load PImage[][] stones
 	stones = new PImage[2][5];
@@ -107,34 +94,13 @@ void setup() {
 	for(int i = 0; i < soilHealth.length; i++){
 		for (int j = 0; j < soilHealth[i].length; j++) {
 			 // 0: no soil, 15: soil only, 30: 1 stone, 45: 2 stones
-			soilHealth[i][j] = 15;      
-
+			soilHealth[i][j] = 15;
+		}
 	}
-}
-
-//0-7
-for(int i=0; i<8; i++){
-  for (int j = 0; j < soilHealth[i].length; j++) {
-      if(i== j){
-        soilHealth[i][j] = 30;
-      }
-    }
-    }
-    
-//8-15
- 
-
 
 	// Initialize soidiers and their position
 
 	// Initialize cabbages and their position
-  int [] cabbageX = new int[6];
-  int [] cabbageY = new int [6];
-  for(int c=0; c<cabbageX.length; c++ ){
-   cabbageX[c] = floor(random(0,7)*SOIL_SIZE);
-   cabbageY[c] = floor (random(0,3)*SOIL_SIZE*c);
-  
-    }
 
 }
 
@@ -197,50 +163,10 @@ void draw() {
 			}
 		}
 
-//0-7
-for(int i=0; i<8; i++){
-  for (int j = 0; j < soilHealth[i].length; j++) {
-      if(i== j){
-        int areaIndex = floor(j/8);
-        image(stones[areaIndex][4], i * SOIL_SIZE, j * SOIL_SIZE);
-      }
-    }
-    }
-
-//emptysoil
-for (int s = 8; s<191; s++){
-      PImage showSoil = null;
-      switch(emptyX[s]){
-        case n1 : showSoil = null;
-        break;
-        case n2 : showSoil = null;
-        break;
-        case n3 : showSoil = null;
-        break;
-        case n4 : showSoil = null;
-        break;
-        case n5 :
-        case Y: showSoil = soilEmpty;
-        break;
-      }
-      if (showSoil != null){
-     // for (int emptyY=0; emptyY<23; emptyY++){
-        int emptyX = floor((s%8)*SOIL_SIZE);
-        int emptyY = floor((s/8)*SOIL_SIZE);
-        image (soilEmpty, emptyX, emptyY);
-      }
-      }
-    
-
-      
-
 		// Cabbages
 		// > Remember to check if playerHealth is smaller than PLAYER_MAX_HEALTH!
-// for(int c=0; c<cabbageX.length; c++ ){
-	//	image(cabbage,cabbageX[c], cabbageY[c]);
-// }
 
-    // Groundhog
+		// Groundhog
 
 		PImage groundhogDisplay = groundhogIdle;
 
@@ -253,7 +179,6 @@ for (int s = 8; s<191; s++){
 			// Check if "player is NOT at the bottom AND the soil under the player is empty"
 			// > If so, then force moving down by setting playerMoveDirection and playerMoveTimer (see downState part below for example)
 			// > Else then determine player's action based on input state
-
 
 			if(leftState){
 
